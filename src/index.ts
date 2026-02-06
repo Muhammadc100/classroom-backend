@@ -3,7 +3,7 @@ AgentAPI.config();
 import express from "express";
 import cors from "cors";
 import { toNodeHandler } from 'better-auth/node'
-import subjectRoutes from "./routes/subjects";
+import subjectRoutes from "./routes/subjects.js";
 import securityMiddleware from "./middleware/security";
 import { auth } from "./lib/auth";
 
