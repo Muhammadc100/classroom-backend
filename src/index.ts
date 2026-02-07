@@ -4,6 +4,8 @@ import express from "express";
 import cors from "cors";
 import { toNodeHandler } from 'better-auth/node'
 import subjectRoutes from "./routes/subjects.js";
+import userRoutes from "./routes/users.js";
+import classesRoutes from "./routes/classes.js"
 import securityMiddleware from "./middleware/security.js";
 import { auth } from "./lib/auth.js";
 
@@ -26,6 +28,8 @@ app.use(express.json());
 app.use(securityMiddleware);
 
 app.use('/api/subjects', subjectRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/classes', classesRoutes)
 
 app.get("/", (req, res) => {
   res.send("Hello, Welcome to the Classroom API!");
