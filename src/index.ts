@@ -22,10 +22,13 @@ app.use(cors({
     credentials: true,
 }));
 
+app.set("trust proxy", true);
 app.all('/api/auth/*splat', toNodeHandler(auth));
 
 app.use(express.json());
-app.use(securityMiddleware);
+app.use("/api", securityMiddleware);
+
+
 
 app.use('/api/subjects', subjectRoutes)
 app.use('/api/users', userRoutes)
