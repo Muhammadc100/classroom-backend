@@ -8,7 +8,7 @@ const securityMiddleware = async (
   res: Response,
   next: NextFunction,
 ) => {
-  if (process.env.NODE_ENV === "test") return next();
+  if (process.env.NODE_ENV === "development") return next();
 
   try {
     const role: RateLimitRole = req.user?.role ?? 'guest';
@@ -18,18 +18,18 @@ const securityMiddleware = async (
 
     switch (role) {
       case "admin":
-        limit = 20;
-        message = "Admin rate limit exceeded (20 per minute). slow down please";
+        limit = 100;
+        message = "Admin rate limit exceeded (100 per minute). slow down please";
         break;
       case "teacher":
       case "student":
-        limit = 10;
-        message = "User rate limit exceeded (10 per minute). Please wait";
+        limit = 50;
+        message = "User rate limit exceeded (50 per minute). Please wait";
         break;
       default:
-        limit = 5;
+        limit = 20;
         message =
-          "Guest rate limit exceeded (5 per minute). Please sign up for higher limits.";
+          "Guest rate limit exceeded (20 per minute). Please sign up for higher limits.";
         break;
     }
 
